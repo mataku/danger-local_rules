@@ -7,6 +7,18 @@ A description of danger-local_rules.
     $ gem install danger-local_rules
 
 ## Usage
+Create `.danger_local_rules.yml` in project root, and add contents to fail or warn.
+
+```yml
+# See: example/.danger_local_rules.yml
+failure:
+  'legacyFunc': ':cry:'
+warning:
+  'TODO': 'You should check'
+  'FIXME': 'Yet?'
+```
+
+Add this to Dangerfile.
 
     $ local_rules.check
 
