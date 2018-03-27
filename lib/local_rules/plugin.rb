@@ -1,33 +1,46 @@
+require 'git_diff_parser'
+
 module Danger
-  # This is your plugin class. Any attributes or methods you expose here will
-  # be available from within your Dangerfile.
-  #
-  # To be published on the Danger plugins site, you will need to have
-  # the public interface documented. Danger uses [YARD](http://yardoc.org/)
-  # for generating documentation from your plugin source, and you can verify
-  # by running `danger plugins lint` or `bundle exec rake spec`.
-  #
-  # You should replace these comments with a public description of your library.
-  #
-  # @example Ensure people are well warned about merging on Mondays
-  #
-  #          my_plugin.warn_on_mondays
-  #
-  # @see  Takuma Homma/danger-local_rules
-  # @tags monday, weekends, time, rattata
-  #
   class DangerLocalRules < Plugin
+    def check
+      diff = github.pr_diff
+      return if diff.nil?
 
-    # An attribute that you can read/write from your Dangerfile
-    #
-    # @return   [Array<String>]
-    attr_accessor :my_attribute
+      failure_rules = rules['failure']
+      warning_rules = rules['warning']
+      return if failure_rules.nil? && warning_rules.nil?
 
-    # A method that you can call from your Dangerfile
-    # @return   [Array<String>]
-    #
-    def warn_on_mondays
-      warn 'Trying to merge code on a Monday' if Date.today.wday == 1
+      if diff.match(Regexp.union(failure_rules.keys + warning_rules.keys))
+        regexp_to_fail = Regexp.union(failure_rules.keys)
+        regexp_to_warn = Regexp.union(warning_rules.keys)
+
+        GitDiffParser.parse(diff).each do |changed_file|
+          next if changed_file.file == 'Dangerfile'
+          changed_file.changed_lines.each do |changed_line|
+            content = changed_line.content
+            # Only checks added contents
+            next unless content.start_with?('+')
+
+            if (content.match(regexp_to_fail))
+              content.match(regexp_to_fail) do |data|
+                fail(failure_rules[data[0]], file: changed_file.file, line: changed_line.number)
+              end
+            end
+
+            if (content.match(regexp_to_warn))
+              content.match(regexp_to_warn) do |data|
+                warn(warning_rules[data[0]], file: changed_file.file, line: changed_line.number)
+              end
+            end
+          end
+        end
+      end
+    end
+
+    private
+
+    def rules
+      YAML.load_file('.danger_local_rules.yml')
     end
   end
 end
