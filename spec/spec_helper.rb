@@ -63,3 +63,15 @@ def testing_dangerfile
   env = Danger::EnvironmentManager.new(testing_env)
   Danger::Dangerfile.new(env, testing_ui)
 end
+
+def dummy_pr_diff
+  File.read(File.expand_path('../fixtures/pr_diff_sample.txt', __FILE__)).chomp
+end
+
+def dummy_warning_pr_diff
+  File.read(File.expand_path('../fixtures/pr_diff_warning_sample.txt', __FILE__)).chomp
+end
+
+def dummy_failure_pr_diff
+  File.read(File.expand_path('../fixtures/pr_diff_failure_sample.txt', __FILE__)).chomp
+end
