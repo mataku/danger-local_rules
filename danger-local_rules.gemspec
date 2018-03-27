@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = LocalRules::VERSION
   spec.authors       = ['Takuma Homma']
   spec.email         = ['nagomimatcha@gmail.com']
-  spec.description   = %q{A short description of danger-local_rules.}
-  spec.summary       = %q{A longer description of danger-local_rules.}
-  spec.homepage      = 'https://github.com/Takuma Homma/danger-local_rules'
+  spec.description   = %q{Manage local rules by Danger.}
+  spec.summary       = %q{Manage local rules by Danger.}
+  spec.homepage      = 'https://github.com/mataku/danger-local_rules'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'danger-plugin-api', '~> 1.0'
+  spec.add_runtime_dependency 'git_diff_parser'
 
   # General ruby development
   spec.add_development_dependency 'bundler', '~> 1.3'
@@ -35,15 +36,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'guard', '~> 2.14'
   spec.add_development_dependency 'guard-rspec', '~> 4.7'
 
-  # If you want to work on older builds of ruby
-  spec.add_development_dependency 'listen', '3.0.7'
-
-  # This gives you the chance to run a REPL inside your tests
-  # via:
-  #
-  #    require 'pry'
-  #    binding.pry
-  #
-  # This will stop test execution and let you inspect the results
   spec.add_development_dependency 'pry'
 end
