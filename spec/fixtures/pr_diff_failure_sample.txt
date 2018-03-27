@@ -1,0 +1,17 @@
+diff --git a/spec/local_rules_spec.rb b/spec/local_rules_spec.rb
+index 846751e..c6d4023 100644
+--- a/spec/local_rules_spec.rb
++++ b/spec/local_rules_spec.rb
+@@ -1,41 +1,9 @@
+-require File.expand_path("../spec_helper", __FILE__)
++require File.expand_path('../spec_helper', __FILE__)
+
+ module Danger
+   describe Danger::DangerLocalRules do
+-    it "should be a plugin" do
++    it 'should be a plugin' do
++    legacy
++    typo
+       expect(Danger::DangerLocalRules.new(nil)).to be_a Danger::Pl
+ugin
+     end
