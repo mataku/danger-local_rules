@@ -6,7 +6,7 @@ require 'local_rules/gem_version.rb'
 Gem::Specification.new do |spec|
   spec.name          = 'danger-local_rules'
   spec.version       = LocalRules::VERSION
-  spec.authors       = ['Takuma Homma']
+  spec.authors       = ['mataku']
   spec.email         = ['nagomimatcha@gmail.com']
   spec.description   = %q{Manage local rules by Danger.}
   spec.summary       = %q{Manage local rules by Danger.}
