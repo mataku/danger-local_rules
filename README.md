@@ -8,8 +8,7 @@ A description of danger-local_rules.
 
 ## Usage
 
-    Methods and attributes from this plugin are available in
-    your `Dangerfile` under the `local_rules` namespace.
+    $ local_rules.check
 
 ## Development
 
