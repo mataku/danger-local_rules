@@ -15,7 +15,7 @@ module Danger
         regexp_to_warn = Regexp.union(warning_rules.keys)
 
         GitDiffParser.parse(diff).each do |changed_file|
-          next if changed_file.file == 'Dangerfile'
+          next if changed_file.file == '.danger_local_rules.yml'
           changed_file.changed_lines.each do |changed_line|
             content = changed_line.content
             # Only checks added contents
