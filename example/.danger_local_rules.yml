@@ -1,7 +1,6 @@
 failure:
   # (string or pattern to check): (failure comments to be posted by Danger if key string exists)
-  'DeprecatedFunc': 'You should use XXX'
-  !ruby/regexp /System.out.print|Log.?/: 'Debug log!'
+  'SomeDeprecatedFunc': 'You should use XXX'
 warning:
   # (string to check): (warning comment to be posted by Danger if key string exists)
   'TODO': 'You should check!'

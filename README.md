@@ -1,6 +1,6 @@
 # danger-local_rules
 
-A description of danger-local_rules.
+A [Danger](http://danger.systems) plugin to manage local rules.
 
 ## Installation
 
