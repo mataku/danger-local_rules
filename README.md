@@ -20,7 +20,13 @@ warning:
 
 Add this to Dangerfile.
 
-    $ local_rules.check
+```ruby
+
+# Optional: you can specify yml file path. (Default: $projectRoot/.danger_local_rules)
+# local_rules.rules_file = './scripts/file.yml'
+local_rules.check
+```
+
 
 ## Development
 
