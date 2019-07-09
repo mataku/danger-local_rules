@@ -2,6 +2,13 @@ require 'git_diff_parser'
 
 module Danger
   class DangerLocalRules < Plugin
+
+    attr_accessor :rules_file
+
+    def rules_file
+      return @rules_file || '.danger_local_rules.yml'
+    end
+
     def check
       diff = github.pr_diff
       return if diff.nil?
@@ -40,7 +47,7 @@ module Danger
     private
 
     def rules
-      YAML.load_file('.danger_local_rules.yml')
+      YAML.load_file(rules_file)
     end
   end
 end

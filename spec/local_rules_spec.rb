@@ -16,6 +16,22 @@ module Danger
       expect(Danger::DangerLocalRules.new(nil)).to be_a Danger::Plugin
     end
 
+    describe '#rules_file' do
+      let(:github_plugin)  { Danger::DangerfileGitHubPlugin }
+      let(:rules_path) { './scripts/rules.yml' }
+    
+      before do
+        allow(YAML).to receive(:load_file).with(rules_path).and_return(load_data)
+        allow_any_instance_of(github_plugin).to receive(:pr_diff).and_return(pr_diff)
+      end
+
+      it do
+        plugin.rules_file = rules_path
+        plugin.check
+        expect(dangerfile.status_report[:errors].length).to eq(0)
+      end
+    end
+
     describe '#check' do
       let(:github_plugin)  { Danger::DangerfileGitHubPlugin }
 
