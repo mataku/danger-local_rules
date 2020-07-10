@@ -6,7 +6,7 @@ module Danger
     attr_accessor :rules_file
 
     def rules_file
-      return @rules_file || '.danger_local_rules.yml'
+      @rules_file || '.danger_local_rules.yml'
     end
 
     def check
@@ -22,7 +22,7 @@ module Danger
         regexp_to_warn = Regexp.union(warning_rules.keys)
 
         GitDiffParser.parse(diff).each do |changed_file|
-          next if changed_file.file == '.danger_local_rules.yml'
+          next if changed_file.file == rules_file
           changed_file.changed_lines.each do |changed_line|
             content = changed_line.content
             # Only checks added contents
