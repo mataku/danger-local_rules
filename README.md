@@ -27,6 +27,10 @@ Add this to Dangerfile.
 local_rules.check
 ```
 
+## Changelog
+
+See [changelog.md](./changelog.md).
+
 
 ## Development
 
